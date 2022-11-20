@@ -113,7 +113,7 @@ useEffect(() => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link component={Navigate} to="/forgot-password" variant="body2">
+              <Link component={Navigate} to="/forgotPassword" variant="body2">
                 Forgot password?
               </Link>
             </Grid>

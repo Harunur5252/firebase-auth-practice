@@ -31,8 +31,8 @@ function App() {
          <Route path='/home' element={<PublicRequired><Home /></PublicRequired>} />
          <Route path='/login' element={<PublicRequired><Login /></PublicRequired>} />
          <Route path='/register' element={<PublicRequired><Register /></PublicRequired>} />
-         <Route path='/forgot-password' element={<PublicRequired><ForgotPassword /></PublicRequired>} />
-         <Route path='/reset-password' element={<PublicRequired><ResetPassword /></PublicRequired>} />
+         <Route path='/forgotPassword' element={<PublicRequired><ForgotPassword /></PublicRequired>} />
+         <Route path='/resetPassword' element={<PublicRequired><ResetPassword /></PublicRequired>} />
          <Route path='/profile' element={<AuthRequired><Profile /></AuthRequired>} />
          <Route path='/private' element={<AuthRequired><Private /></AuthRequired>} />
       </Routes>
