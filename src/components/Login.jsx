@@ -1,11 +1,9 @@
 import {useEffect,useState} from 'react'
-import { Link as Navigate,useNavigate } from 'react-router-dom';
+import { Link as Navigate,useNavigate,useLocation } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -15,7 +13,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { toast } from 'react-toastify';
 import { useForm } from "react-hook-form";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup } from "firebase/auth";
 import {auth} from '../utils/firebase.config'
 
 
@@ -25,16 +23,31 @@ function Login() {
   const [resetUserInfo,setResetUserInfo] = useState({})
   const {email,password} = resetUserInfo
   const navigate = useNavigate()
+  const location = useLocation()
+  
+  const googleSignIn = async () => {
+    const provider = new GoogleAuthProvider()
+    console.log(auth)
+    try {
+      await signInWithPopup(auth,provider)
+      navigate(location?.state?.from ? location?.state?.from : '/profile')
+      toast.success('login successful!')
+    } catch (err) {
+      console.log(err.message)
+      toast.error(err.message)
+    }
+  }
+
   const onSubmit = async data => {
     setResetUserInfo(data)
     try {
       await signInWithEmailAndPassword(auth, data?.email, data?.password)
-      navigate('/')
+      navigate(location?.state?.from ? location?.state?.from : '/profile')
       toast.success('login successful!')
     } catch (err) {
-      toast.error('email or password not matched')
+      toast.error(err.message)
     }
-};
+  };
 
 useEffect(() => {
  if(isSubmitSuccessful){
@@ -69,6 +82,7 @@ useEffect(() => {
             required
             fullWidth
             id="email"
+            type='email'
             label="Email Address"
             {...register("email",{required: 'valid email is required'})}
             autoComplete="email"
@@ -110,9 +124,18 @@ useEffect(() => {
             </Grid>
           </Grid>
         </Box>
+        <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            onClick={googleSignIn}
+          >
+            Sign In with Google
+          </Button>
       </Box>
     </Container>
-  </ThemeProvider>
+    </ThemeProvider>
   )
 }
 

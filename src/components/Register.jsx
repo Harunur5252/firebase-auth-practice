@@ -26,11 +26,11 @@ function Register() {
     const onSubmit = async data => {
       setResetUserInfo(data)
       try {
-       await createUserWithEmailAndPassword(auth, data?.email, data?.password)
-       navigate('/profile')
+        await createUserWithEmailAndPassword(auth, data?.email, data?.password)
+        navigate('/home')
         toast.success('registration successful!')
       } catch (err) {
-        toast.error('internal server error')
+        toast.error(err.message)
       }
 };
 
@@ -70,6 +70,7 @@ useEffect(() => {
                   autoComplete="given-name"
                   {...register("firstName",{ required: 'firstName is required', maxLength:{value : 20,message:'firstName must be less than or equal ten character'} })}
                   fullWidth
+                  type='text'
                   color='success'
                   id="firstName"
                   label="First Name"
@@ -80,6 +81,7 @@ useEffect(() => {
                 <TextField
                   {...register("lastName",{ required: 'lastName is required', maxLength:{value : 20,message:'lastName must be less than or equal ten character'} })}
                   fullWidth
+                  type='text'
                   id="lastName"
                   label="Last Name"
                   color='success'
@@ -92,6 +94,7 @@ useEffect(() => {
                   required
                   fullWidth
                   id="email"
+                  type='email'
                   label="Email Address"
                   color='success'
                   {...register("email",{required: 'valid email is required'})}

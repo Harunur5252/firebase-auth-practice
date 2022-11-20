@@ -7,6 +7,9 @@ import ResetPassword from './components/ResetPassword'
 import Profile from './components/Profile'
 import Private from './components/Private'
 import Navigation from './components/Navigation'
+import AuthRequired from './components/AuthRequired';
+import PublicRequired from './components/PublicRequired';
+import Home from './components/Home';
 
 function App() {
   return (
@@ -25,12 +28,13 @@ function App() {
       />
       <Navigation />
       <Routes>
-         <Route path='/login' element={<Login />} />
-         <Route path='/register' element={<Register />} />
-         <Route path='/forgot-password' element={<ForgotPassword />} />
-         <Route path='/reset-password' element={<ResetPassword />} />
-         <Route path='/profile' element={<Profile />} />
-         <Route path='/private' element={<Private />} />
+         <Route path='/home' element={<PublicRequired><Home /></PublicRequired>} />
+         <Route path='/login' element={<PublicRequired><Login /></PublicRequired>} />
+         <Route path='/register' element={<PublicRequired><Register /></PublicRequired>} />
+         <Route path='/forgot-password' element={<PublicRequired><ForgotPassword /></PublicRequired>} />
+         <Route path='/reset-password' element={<PublicRequired><ResetPassword /></PublicRequired>} />
+         <Route path='/profile' element={<AuthRequired><Profile /></AuthRequired>} />
+         <Route path='/private' element={<AuthRequired><Private /></AuthRequired>} />
       </Routes>
     </>
   )

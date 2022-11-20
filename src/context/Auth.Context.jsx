@@ -12,6 +12,7 @@ export const AuthProvider = ({children}) => {
       setCurrentUser(user)
     })
   },[])
+
   return (
     <AuthContext.Provider value={currentUser}>{children}</AuthContext.Provider>
   ) 

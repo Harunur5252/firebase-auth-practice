@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Navigate, NavLink, useNavigate,useLocation } from 'react-router-dom';
 import {signOut} from 'firebase/auth'
 import { auth } from '../utils/firebase.config';
 import { toast } from 'react-toastify';
@@ -12,6 +12,7 @@ import { AuthContext } from '../context/Auth.Context';
 
 function Navigation() {
   const navigate = useNavigate()
+  const location = useLocation()
   const currentUser = useContext(AuthContext)
 
   const activeStyle = {
@@ -25,11 +26,11 @@ function Navigation() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            Firebase Authentication
           </Typography>
-          <Button component={NavLink} to='/' sx={activeStyle} color="inherit">Home</Button>
           {!currentUser && 
              <>
+                <Button component={NavLink} to='/home' sx={activeStyle} color="inherit">Home</Button>
                 <Button component={NavLink} to='/login' sx={activeStyle} color="inherit">Login</Button>
                 <Button component={NavLink} to='/register' sx={activeStyle}  color="inherit">Register</Button>
              </>
@@ -41,7 +42,7 @@ function Navigation() {
                 <Button component={NavLink} to='/private' sx={activeStyle} color="inherit">Private</Button>
                 <Button onClick={() => {
                   signOut(auth)
-                  navigate('/login')
+                  {<Navigate to='/login' />}
                   toast.success('logout successfully!')
                 }} color="inherit">Logout</Button>
             </>
