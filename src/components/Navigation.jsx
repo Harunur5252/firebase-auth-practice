@@ -13,7 +13,7 @@ import { AuthContext } from '../context/Auth.Context';
 function Navigation() {
   const navigate = useNavigate()
   const location = useLocation()
-  const currentUser = useContext(AuthContext)
+  const {currentUser} = useContext(AuthContext)
 
   const activeStyle = {
     '&.active' : {

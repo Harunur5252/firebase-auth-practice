@@ -27,7 +27,6 @@ function Login() {
   
   const googleSignIn = async () => {
     const provider = new GoogleAuthProvider()
-    console.log(auth)
     try {
       await signInWithPopup(auth,provider)
       navigate(location?.state?.from ? location?.state?.from : '/profile')

@@ -3,12 +3,17 @@ import { Navigate,useLocation } from 'react-router-dom'
 import { AuthContext } from '../context/Auth.Context'
 
 function PublicRequired({children}) {
-    const currentUser = useContext(AuthContext)
+    const {currentUser,loading} = useContext(AuthContext)
     const location = useLocation()
-    const navigate = currentUser ? <Navigate to={location?.state?.from ? location?.state?.from : '/profile'} /> : children
-    return (
-      <>{navigate}</>
-    )
+    if(loading){
+       if(currentUser){
+         return <Navigate to={location?.state?.from ? location?.state?.from : '/profile'} />
+       }else{
+         return children
+       }
+    }else{
+      return 'loading...'
+    }
 }
 
 export default PublicRequired
