@@ -17,10 +17,10 @@ export const auth = getAuth(app)
 
 // set up database(or connection)
 const db = getFirestore(app)
-const colRef = collection(db,'notes')
+export const notesColRef = collection(db,'notes')
 
 // simple database(for all data)(after browser reload we can see only update data if server data is changed)
-// getDocs(colRef)
+// getDocs(notesColRef)
 //   .then(snapshot => {
 //     const notes = []
 //     snapshot.docs.forEach(doc => {
@@ -33,7 +33,7 @@ const colRef = collection(db,'notes')
 
 
 // realtime (for all document) documents comes from server(firebase)
-  // onSnapshot(colRef,snapshot => {
+  // onSnapshot(notesColRef,snapshot => {
   //   const notes = []
   //   snapshot.docs.forEach(doc => {
   //     notes.push({
@@ -46,7 +46,7 @@ const colRef = collection(db,'notes')
 
 
   // single document data retrieve according to simple database
-  // const docRef = doc(colRef,'mhNWzbQZUAHtl1WHb0lM')
+  // const docRef = doc(notesColRef,'mhNWzbQZUAHtl1WHb0lM')
   // getDoc(docRef)
   //    .then(doc => {
   //      console.log(doc.data())
@@ -57,7 +57,7 @@ const colRef = collection(db,'notes')
 
 // realtime (single document) data comes from server(firebase)
 
-// const docRef = doc(colRef,'mhNWzbQZUAHtl1WHb0lM')
+// const docRef = doc(notesColRef,'mhNWzbQZUAHtl1WHb0lM')
 // onSnapshot(docRef)
 //    .then(doc => {
 //      console.log(doc.data())
@@ -67,7 +67,7 @@ const colRef = collection(db,'notes')
 
 
 // document add 
-// addDoc(colRef, {
+// addDoc(notesColRef, {
 //   title:'title from vscode',
 //   description:'description from vscode',
 //   user:{
@@ -78,7 +78,7 @@ const colRef = collection(db,'notes')
 
 
 // update document
-// const docRef = doc(colRef,'mhNWzbQZUAHtl1WHb0lM')
+// const docRef = doc(notesColRef,'mhNWzbQZUAHtl1WHb0lM')
 // updateDoc(docRef,{
 //   title:'sample note',
 //   'user.name':'harun-2'
@@ -86,14 +86,14 @@ const colRef = collection(db,'notes')
 
 
 // delete document
-// const docRef = doc(colRef,'mhNWzbQZUAHtl1WHb0lM')
+// const docRef = doc(notesColRef,'mhNWzbQZUAHtl1WHb0lM')
 // deleteDoc(docRef).then(() => {
 //   console.log('document deleted successfully')
 // })
 
 
 // search query(search documents)
-// const quiredData = query(colRef,where('title','==','title from vscode'))
+// const quiredData = query(notesColRef,where('title','==','title from vscode'))
 // getDocs(quiredData)
 //   .then(snapshot => {
 //     const notes = []

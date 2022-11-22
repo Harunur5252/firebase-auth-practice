@@ -9,13 +9,16 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import {BrowserRouter} from 'react-router-dom'
 import { AuthProvider } from './context/Auth.Context';
+import { NoteProvider } from './context/Note.Context';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <App />
+        <NoteProvider>
+           <App />
+        </NoteProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>

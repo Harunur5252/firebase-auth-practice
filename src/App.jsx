@@ -10,6 +10,9 @@ import Navigation from './components/Navigation'
 import AuthRequired from './components/AuthRequired';
 import PublicRequired from './components/PublicRequired';
 import Home from './components/Home';
+import Notes from './utils/Notes';
+import EditNote from './utils/EditNote';
+import AddNote from './utils/AddNote';
 
 function App() {
   return (
@@ -35,6 +38,9 @@ function App() {
          <Route path='/resetPassword' element={<PublicRequired><ResetPassword /></PublicRequired>} />
          <Route path='/profile' element={<AuthRequired><Profile /></AuthRequired>} />
          <Route path='/private' element={<AuthRequired><Private /></AuthRequired>} />
+         <Route path='/notes' element={<Notes />} />
+         <Route path='/note-add' element={<AuthRequired><AddNote /></AuthRequired>} />
+         <Route path='/note-edit/:noteId' element={<AuthRequired><EditNote /></AuthRequired>} />
       </Routes>
     </>
   )

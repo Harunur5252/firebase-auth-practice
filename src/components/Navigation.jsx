@@ -23,7 +23,7 @@ function Navigation() {
   return (
     <>
        <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Firebase Authentication
@@ -35,14 +35,17 @@ function Navigation() {
                 <Button component={NavLink} to='/register' sx={activeStyle}  color="inherit">Register</Button>
              </>
           }
+            <Button component={NavLink} to='/notes' sx={activeStyle} color="inherit">Notes</Button>
+          
           {
             currentUser && 
             <>
+            <Button component={NavLink} to='/note-add' sx={activeStyle} color="inherit">Add Note</Button>
                 <Button component={NavLink} to='/profile' sx={activeStyle} color="inherit">Profile</Button>
                 <Button component={NavLink} to='/private' sx={activeStyle} color="inherit">Private</Button>
                 <Button onClick={() => {
                   signOut(auth)
-                  {<Navigate to='/login' />}
+                  navigate('/login')
                   toast.success('logout successfully!')
                 }} color="inherit">Logout</Button>
             </>

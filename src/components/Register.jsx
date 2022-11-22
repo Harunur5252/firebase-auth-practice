@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 import {auth} from '../utils/firebase.config'
 import { toast } from 'react-toastify';
@@ -23,16 +23,20 @@ function Register() {
     const [resetUserInfo,setResetUserInfo] = useState({})
     const {firstName,lastName,email,password} = resetUserInfo
     const navigate = useNavigate()
+
     const onSubmit = async data => {
       setResetUserInfo(data)
       try {
         await createUserWithEmailAndPassword(auth, data?.email, data?.password)
+        updateProfile(auth.currentUser,{
+          displayName : `${data?.firstName} ${data?.lastName}`
+        })
         navigate('/home')
         toast.success('registration successful!')
       } catch (err) {
         toast.error(err.message)
       }
-};
+    };
 
 useEffect(() => {
    if(isSubmitSuccessful){
